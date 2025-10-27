@@ -1,0 +1,54 @@
+# esse arquivo só serve para ignorar as pastas criadas durante o tempo de execução do projeto
+
+# -----------------------------------------
+# backend
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.venv/
+venv/
+.env
+.env.*
+*.env
+.flaskenv
+instance/
+.pytest_cache/
+.mypy_cache/
+.dmypy.json
+.pyre/
+.tox/
+.coverage
+htmlcov/
+*.sqlite3
+*.db
+*.log
+logs/
+
+# manter upload se for gerado em runtime
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# -----------------------------------------
+# frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/.cache/
+frontend/.ng_build/
+# Se você tiver variantes de env locais, ignore-as:
+# frontend/src/environments/environment.*.ts
+
+# -----------------------------------------
+# build genérico
+dist/
+build/
+
+# -----------------------------------------
+# IDE / SO
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
