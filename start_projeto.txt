@@ -15,3 +15,12 @@ Aqui vou deixar as orientações de inicialização
 - cd projeto_emeece/frontend
 - npm install
 - npx ng serve --project frontend
+
+------------Up no Git------------
+- git init
+- git branch -M main
+- git status
+- git add .
+- git commit -m "comentario do commit"
+- git remote add origin https://github.com/Muletinha/projeto_emeece.git
+- git push -u origin main
