@@ -22,5 +22,5 @@ Aqui vou deixar as orientações de inicialização
 - git status
 - git add .
 - git commit -m "comentario do commit"
-- git remote add origin https://github.com/Muletinha/projeto_emeece.git
+- git remote add origin https://github.com/Muletinha/projeto_emeece
 - git push -u origin main
