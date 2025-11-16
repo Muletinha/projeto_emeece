@@ -1,0 +1,22 @@
+<div class="page products-page">
+  <section *ngIf="!products?.length" class="empty-products">
+    <p>Ainda não há produtos por aqui.</p>
+  </section>
+
+  <section class="products-grid">
+    <article class="card" *ngFor="let p of products" (click)="openDetail(p)">
+      <div class="thumb-wrap">
+        <img *ngIf="p.image" [src]="'http://localhost:5000/uploads/' + p.image" alt="img" class="card-thumb">
+        <div *ngIf="!p.image" class="no-image">Sem imagem</div>
+      </div>
+
+      <div class="info">
+        <strong class="name">{{ p.name }}</strong>
+        <div class="meta">
+          <span class="price">R$ {{ p.price | number:'1.2-2' }}</span>
+          <small class="stock">Estoque: {{ p.stock_qty }}</small>
+        </div>
+      </div>
+    </article>
+  </section>
+</div>

@@ -1,0 +1,17 @@
+Aqui vou deixar as orientações de inicialização
+
+- Instale e deixe o NodeJS devidamente atualizado
+- XAMPP instalado rodando APACHE e MySQL (usuário ROOT sem senha)
+
+------------backend-------------
+- cd projeto_emmece/backend
+- python -m venv .venv
+- source .venv/Scripts/activate
+- pip install -r requirements.txt
+---isso vai startar o back---
+- python app.py 
+
+------------frontend-------------
+- cd projeto_emeece/frontend
+- npm install
+- npx ng serve --project frontend

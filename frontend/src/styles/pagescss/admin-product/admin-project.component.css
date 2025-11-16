@@ -1,0 +1,162 @@
+:root{
+    --bg:#1f1f22;
+    --panel:#2a2a2f;
+    --accent-purple:#5f00ff;
+    --accent-deep:#3a00a6;
+    --card-bg: linear-gradient(90deg, rgba(91,0,255,1) 0%, rgba(58,0,166,1) 100%);
+    --white: #ffffff;
+    --muted:#cfcbd6;
+    --green:#06b02c;
+    --red:#e01616;
+    --radius:18px;
+    --input-height:40px;
+    --gap:18px;
+    font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+    box-sizing: border-box;
+  }
+  
+  * { box-sizing: border-box; }
+  html,body { height:100%; margin:0; background:var(--bg); color:var(--muted); }
+  .page { min-height:100vh; padding:20px; }
+  
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    background: linear-gradient(180deg, #131316 0%, #252327 100%);
+    padding:24px 24px;
+    border-radius:0px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+    margin-bottom:22px;
+  }
+  .topbar .icon-btn{
+    width:48px;height:48px;border-radius:50%;border:none;
+    background:var(--accent-purple); color:var(--white);
+    font-size:22px;
+    display:inline-flex; align-items:center; justify-content:center;
+    box-shadow:0 6px 18px rgba(95,0,255,0.18);
+  }
+  .brand{
+    text-align:center;
+    color:var(--muted);
+    flex:1;
+  }
+  .brand .app-title{ font-weight:600; letter-spacing:1px; color:#cfc9d9; }
+  .brand .app-sub{ font-size:12px; color:#b9b3c6; margin-top:2px; }
+  
+  .pill-cta{
+    background: linear-gradient(90deg,#6b19ff,#8b3bff);
+    color:var(--white);
+    border:none;
+    padding:12px 24px;
+    border-radius:28px;
+    font-weight:700;
+    box-shadow:0 8px 24px rgba(107,25,255,0.18);
+  }
+  
+  .manage-area{ display:flex; justify-content:center; padding:6px; }
+  
+  .manage-card{
+    width:100%;
+    max-width:1100px;
+    border-radius:22px;
+    padding:26px;
+    background:var(--card-bg);
+    box-shadow: 0 12px 40px rgba(45,0,120,0.35);
+  }
+  
+  .cols{
+    display:grid;
+    grid-template-columns: 1fr 1fr 360px;
+    gap:20px;
+    align-items:start;
+  }
+  
+  .col { display:flex; flex-direction:column; gap:14px; }
+  .col-left input,
+  .col-mid input,
+  .col-left textarea {
+    background:#ffffff;
+    border-radius:999px;
+    border:none;
+    height:var(--input-height);
+    padding:0 18px;
+    font-size:14px;
+    color:#111;
+    outline:none;
+    box-shadow: inset 0 -2px 0 rgba(0,0,0,0.02);
+  }
+  
+  .col-left textarea{
+    min-height:86px;
+    border-radius:12px;
+    padding:12px 18px;
+    resize:vertical;
+  }
+  
+  .col-mid input{ height:var(--input-height); }
+  
+  .file-chooser{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    height:40px;
+    border-radius:999px;
+    padding:0 16px;
+    cursor:pointer;
+    user-select:none;
+    background:#ffffff;
+    color:#222;
+    font-weight:600;
+    width:fit-content;
+  }
+  .file-chooser input[type="file"]{
+    position:absolute;
+    width:1px;height:1px;opacity:0;overflow:hidden;border:0;padding:0;margin:-1px;
+  }
+  
+  .action-row{ display:flex; gap:12px; margin-top:8px; align-items:center; }
+  .btn{
+    min-width:110px;
+    padding:10px 18px;
+    border-radius:16px;
+    border:none;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow:0 6px 18px rgba(0,0,0,0.25);
+  }
+  .btn-save{
+    background:linear-gradient(180deg,#08c43a,#048f2a);
+    color:white;
+  }
+  .btn-danger{
+    background:linear-gradient(180deg,#ff3333,#c60b0b);
+    color:white;
+  }
+  
+  .image-frame{
+    display:flex; align-items:center; justify-content:center;
+    padding:8px;
+  }
+  .image-frame .preview{
+    width:360px;
+    height:100%;
+    border-radius:14px;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    box-shadow: inset 0 0 0 6px rgba(255,255,255,0.02), 0 12px 30px rgba(0,0,0,0.45);
+    border:6px solid rgba(255,255,255,0.06);
+  }
+  .image-frame .preview.placeholder{
+    background:linear-gradient(180deg,#ffffff,#f5f5f5);
+    opacity:0.25;
+  }
+  
+  @media (max-width:1000px){
+    .cols{ grid-template-columns: 1fr; }
+    .col-right{ order:-1; }
+    .image-frame .preview{ height:200px; }
+  }
+ 

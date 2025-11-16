@@ -1,0 +1,42 @@
+<div *ngIf="product" class="page product-detail">
+  <section class="pd-main">
+    <div class="pd-image">
+      <img *ngIf="product.image" [src]="'http://localhost:5000/uploads/' + product.image" alt="produto" class="pd-thumb">
+      <div *ngIf="!product.image" class="no-image-detail">Sem imagem</div>
+    </div>
+
+    <div class="pd-info">
+      <h2 class="pd-title">
+        {{ product.name }}
+        <span class="pd-badge" *ngIf="product.stock_qty === 0">Esgotado</span>
+      </h2>
+
+      <p class="pd-desc">{{ product.description }}</p>
+
+      <div class="pd-price-line">
+        <span class="label">Preço</span>
+        <b class="value">R$ {{ product.price | number:'1.2-2' }}</b>
+      </div>
+
+      <div *ngIf="product.stock_qty > 0" class="pd-qty-line">
+        <label>Quantidade:</label>
+        <div class="qty-box">
+          <button class="btn-qty" (click)="decDetail()">−</button>
+          <input type="number"
+                 [(ngModel)]="qty"
+                 [min]="1"
+                 [max]="product.stock_qty"
+                 (change)="onQtyInputChange()"
+                 (blur)="onQtyInputChange()"
+                 class="qty-input">
+          <button class="btn-qty" (click)="incDetail()">+</button>
+          <small class="stock-hint">máx: {{ product.stock_qty }}</small>
+        </div>
+      </div>
+
+      <div class="pd-actions">
+        <button class="btn primary" (click)="addToCart()" [disabled]="outOfStock">Adicionar ao carrinho</button>
+      </div>
+    </div>
+  </section>
+</div>

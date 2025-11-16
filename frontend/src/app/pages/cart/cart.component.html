@@ -1,0 +1,91 @@
+<div class="page cart-container">
+  <h2 class="sr-only">Carrinho</h2>
+
+  <div *ngIf="!cartId || !items?.length" class="empty-cart">
+    Seu carrinho está vazio.
+  </div>
+
+  <div *ngIf="items?.length" class="cart-table">
+    <!-- header -->
+    <div class="cart-header">
+      <div class="th col-img">Produto</div>
+      <div class="th col-title">Descrição</div>
+      <div class="th col-qty">Quantidade</div>
+      <div class="th col-ship">Entrega</div>
+      <div class="th col-sub">Subtotal</div>
+      <div class="th col-act">Ação</div>
+    </div>
+
+    <!-- coloca o seletor de frete na coluna -->
+    <div class="cart-row" *ngFor="let it of items; let i = index;">
+      <!-- imagem -->
+      <div class="td col-img">
+        <img *ngIf="it.image" [src]="imageBaseUrl + it.image" alt="img" class="thumb">
+        <div *ngIf="!it.image" class="no-image-cart">Sem imagem</div>
+      </div>
+
+      <!-- titulo e preço isolado do produto -->
+      <div class="td col-title">
+        <div class="name">{{ it.product_name }}</div>
+        <div class="unit">R$ {{ it.unit_price | number:'1.2-2' }}</div>
+      </div>
+
+      <!-- quantidade com botões + e - -->
+      <div class="td col-qty">
+        <div class="qty-box">
+          <button class="btn-qty" (click)="decCart(it)">−</button>
+          <input type="number"
+                 [(ngModel)]="it.qty"
+                 [min]="1"
+                 [max]="it.max_qty"
+                 (change)="onQtyChange(it)"
+                 (blur)="onQtyChange(it)"
+                 class="qty-input">
+          <button class="btn-qty" (click)="incCart(it)">+</button>
+        </div>
+        <small class="stock-hint">máx: {{ it.max_qty }}</small>
+      </div>
+
+      <!-- mostra o seletor na primeira linha apenas (coluna permanece alinhada) -->
+      <div class="td col-ship" *ngIf="i === 0; else shipSpacer">
+        <div class="ship-box">
+          <label>Entrega</label>
+          <select [(ngModel)]="shippingType">
+            <option value="padrao">Padrão (R$ 10)</option>
+            <option value="expresso">Expresso (R$ 25)</option>
+          </select>
+          <small class="hint">{{ shippingType === 'expresso' ? 'Entrega em até 3 dias úteis' : 'Entrega econômica' }}</small>
+          <div class="ship-value">R$ {{ (shippingType==='expresso'?25:10) | number:'1.2-2' }}</div>
+        </div>
+      </div>
+      <ng-template #shipSpacer>
+        <div class="td col-ship"></div>
+      </ng-template>
+
+      <!-- Subtotal -->
+      <div class="td col-sub">
+        R$ {{ it.subtotal | number:'1.2-2' }}
+      </div>
+
+      <!-- Remover -->
+      <div class="td col-act">
+        <button class="btn danger" (click)="removeItem(it.id)">Excluir</button>
+      </div>
+    </div>
+
+    <!-- footer  (totais e fechar pedido) -->
+    <div class="cart-footer">
+      <div class="tot-line">
+        <span>Produtos</span>
+        <b>R$ {{ productsTotal | number:'1.2-2' }}</b>
+      </div>
+
+      <div class="tot-line grand">
+        <span>Total</span>
+        <b>R$ {{ getTotal() | number:'1.2-2' }}</b>
+      </div>
+
+      <button class="btn primary checkout" (click)="checkout()">Fechar pedido</button>
+    </div>
+  </div>
+</div>

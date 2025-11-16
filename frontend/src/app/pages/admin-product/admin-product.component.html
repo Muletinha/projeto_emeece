@@ -1,0 +1,42 @@
+<div class="page admin-page">
+  <section class="manage-area">
+    <form class="manage-card" (ngSubmit)="save()" novalidate>
+      <div class="cols">
+        <div class="col">
+          <label>ID</label>
+          <input type="number" [(ngModel)]="model.id" name="id" (change)="onIdChanged()" (blur)="onIdChanged()" placeholder="Digite o ID">
+
+          <label>Nome</label>
+          <input type="text" [(ngModel)]="model.name" name="name" placeholder="Nome do produto">
+
+          <label>Preço (R$)</label>
+          <input type="number" step="0.01" min="0" [(ngModel)]="model.price" name="price">
+
+          <label>Estoque</label>
+          <input type="number" min="0" [(ngModel)]="model.stock_qty" name="stock">
+
+          <label>Descrição</label>
+          <textarea rows="3" [(ngModel)]="model.description" name="desc"></textarea>
+
+          <label>Imagem</label>
+          <label class="file-chooser">
+            <input type="file" accept="image/*" (change)="onFileSelected($event)">
+            <span>Escolher imagem</span>
+          </label>
+
+          <div class="action-row">
+            <button class="btn btn-save" type="submit">Salvar</button>
+            <button class="btn btn-danger" type="button" (click)="remove()" [disabled]="!exists">Excluir</button>
+          </div>
+        </div>
+
+        <div class="col image-frame">
+          <div class="preview" *ngIf="exists && imageUrl">
+            <img [src]="imageUrl" alt="pré-visualização">
+          </div>
+          <small class="muted" *ngIf="!exists">Digite um ID existente para visualizar a imagem atual.</small>
+        </div>
+      </div>
+    </form>
+  </section>
+</div>
