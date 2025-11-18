@@ -5,7 +5,7 @@ Base = declarative_base()
 
 class Product(Base):
     __tablename__ = "products"
-    # ID sem autoincremento (você já usa o ID escolhido no admin)
+    # ID sem autoincremento
     id = Column(Integer, primary_key=True, autoincrement=False)
     name = Column(String(255), nullable=False)
     description = Column(Text, nullable=True)
@@ -21,7 +21,6 @@ class CartItem(Base):
     product_name = Column(String(255), nullable=False)
     unit_price = Column(Float, nullable=False)
     qty = Column(Integer, nullable=False)
-    # max_qty = snapshot do estoque no momento do add (para UX)
     max_qty = Column(Integer, nullable=False)
     product = relationship("Product", foreign_keys=[product_id])
 

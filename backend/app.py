@@ -9,9 +9,7 @@ from db_init import recreate_database
 from sqlalchemy import func
 from sqlalchemy.exc import SQLAlchemyError
 
-# ------------------------
 # Config
-# ------------------------
 DB_USER = os.getenv("DB_USER", "root")
 DB_PASS = os.getenv("DB_PASS", "")
 DB_HOST = os.getenv("DB_HOST", "localhost")
@@ -20,7 +18,7 @@ DB_NAME = os.getenv("DB_NAME", "projeto_emeece")
 UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), "uploads")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-# Recria DB em DEV (como você descreveu)
+# recria o DB
 if os.getenv("DEV_RESET_DB", "true").lower() == "true":
     recreate_database()
 
@@ -30,19 +28,14 @@ Base.metadata.create_all(engine)
 app = Flask(__name__)
 CORS(app)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
-app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024  # 10MB
+app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024
 
-# ------------------------
-# Utils
-# ------------------------
 def calc_cart_total(session, cart_id: str) -> float:
     total = session.query(func.coalesce(func.sum(CartItem.unit_price * CartItem.qty), 0.0))\
                    .filter(CartItem.cart_id == cart_id).scalar() or 0.0
     return float(total)
 
-# ------------------------
 # Produtos
-# ------------------------
 @app.route("/api/products", methods=["GET"])
 def list_products():
     session = Session()
@@ -131,7 +124,7 @@ def delete_product(product_id):
         session.close()
         return jsonify({"error": "Erro ao remover produto"}), 500
 
-# Upload simples de imagem
+# upload de imagem
 @app.route("/api/upload", methods=["POST"])
 def upload():
     if "file" not in request.files:
@@ -149,9 +142,7 @@ def upload():
 def uploaded_file(filename):
     return send_from_directory(UPLOAD_FOLDER, filename, as_attachment=False)
 
-# ------------------------
 # Carrinho
-# ------------------------
 @app.route("/api/cart/add", methods=["POST"])
 def add_to_cart():
     """
@@ -208,7 +199,7 @@ def get_cart(cart_id):
     out = []
     total = 0.0
     for it in items:
-        # inclui imagem do produto
+        # incluir imagem do produto
         image = it.product.image if it.product else None
         subtotal = float(it.unit_price) * int(it.qty)
         total += subtotal
